@@ -12,14 +12,14 @@ document.addEventListener('DOMContentLoaded', function() {
                     </div>
                     <div class="modal-body">
                         <div class="modal-image">
-                            <img src="Snapshoot Portfolio.svg" alt="oject screenshot" id="modalImage">
+                            <img src="Snapshoot Portfolio.svg" alt="Project screenshot" id="modalImage">
                         </div>
                         <div class="modal-description">
                             <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it 1960s.</p>
                             <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it 1960s with the releax map lapora verita.</p>
                             <div class="modal-buttons">
-                                <a href="#" class="modal-button see-live">See live<img src="external-link.svg" alt="see live button"></a>
-                                <a href="#" class="modal-button see-source">See source <img src="github.svg" alt="see live button"></a>
+                                <a href="#" class="modal-button see-live">See live<img src="external-link.svg"></a>
+                                <a href="#" class="modal-button see-source">See source<img src="github.svg"></a>
                             </div>
                         </div>
                     </div>
@@ -148,7 +148,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
             
             .modal-button:hover {
-                background-color: white;
+                background-color: #FFF5E1;
                 color: #F55800;
                 border: 2px solid #F55800;
             }
@@ -162,7 +162,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const closeButton = document.querySelector('.close-button');
     const mailIcon = document.querySelector('.envelope-regular');
     function openModal() {
-
+        
         modal.style.display = 'block';
         setTimeout(() => {
             modal.classList.add('show');
@@ -171,14 +171,13 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     function closeModal() {
-        modal.classList.remove('show');
+        modal.classList.remove('show'); 
         setTimeout(() => {
             modal.style.display = 'none';
         }, 300);
         document.body.style.overflow = '';
     }
     const mailLink = mailIcon ? mailIcon.closest('a') : null;
-    
     if (mailLink) {
         mailLink.addEventListener('click', function(e) {
             e.preventDefault(); 
