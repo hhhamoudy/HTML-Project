@@ -18,14 +18,16 @@ document.addEventListener('DOMContentLoaded', function() {
                             <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it 1960s.</p>
                             <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it 1960s with the releax map lapora verita.</p>
                             <div class="modal-buttons">
-                                <a href="#" class="modal-button see-live">See live<img src="external-link.svg"></a>
-                                <a href="#" class="modal-button see-source">See source<img src="github.svg"></a>
+                                <a href="#" class="modal-button see-live">See live<img src= "external-link.svg" alt="External link"></a>
+                                <a href="#" class="modal-button see-source">See source<img src ="github.svg" alt="GitHub"></a>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+            <div class="menu-overlay"></div>
         `;
+        
         document.body.insertAdjacentHTML('beforeend', modalHTML);
         const modalCSS = `
             .popup-modal {
@@ -162,7 +164,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const closeButton = document.querySelector('.close-button');
     const mailIcon = document.querySelector('.envelope-regular');
     function openModal() {
-        
         modal.style.display = 'block';
         setTimeout(() => {
             modal.classList.add('show');
@@ -171,10 +172,11 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     function closeModal() {
-        modal.classList.remove('show'); 
+        modal.classList.remove('show');
         setTimeout(() => {
             modal.style.display = 'none';
         }, 300);
+        
         document.body.style.overflow = '';
     }
     const mailLink = mailIcon ? mailIcon.closest('a') : null;
@@ -195,4 +197,54 @@ document.addEventListener('DOMContentLoaded', function() {
             closeModal();
         }
     });
+    const hamburger = document.querySelector('.hamburger');
+    const navlinks = document.querySelector('.navlinks');
+    const menuOverlay = document.querySelector('.menu-overlay') || document.createElement('div');
+
+    if (!document.querySelector('.menu-overlay')) {
+        menuOverlay.className = 'menu-overlay';
+        document.body.appendChild(menuOverlay);
+    }
+
+    if (hamburger) {
+        console.log("Hamburger menu found");
+        
+        hamburger.addEventListener('click', function() {
+            console.log("Hamburger clicked");
+            hamburger.classList.toggle('active');
+            navlinks.classList.toggle('active');
+            menuOverlay.classList.toggle('active');
+
+            if (navlinks.classList.contains('active')) {
+                document.body.style.overflow = 'hidden';
+            } else {
+                document.body.style.overflow = '';
+            }
+        });
+    }
+    const navLinks = document.querySelectorAll('.navlinks a');
+    navLinks.forEach(link => {
+        link.addEventListener('click', function() {
+            hamburger.classList.remove('active');
+            navlinks.classList.remove('active');
+            menuOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+    });
+    menuOverlay.addEventListener('click', function() {
+        hamburger.classList.remove('active');
+        navlinks.classList.remove('active');
+        menuOverlay.classList.remove('active');
+        document.body.style.overflow = '';
+    });
+    window.addEventListener('resize', function() {
+        if (window.innerWidth > 768 && navlinks.classList.contains('active')) {
+            hamburger.classList.remove('active');
+            navlinks.classList.remove('active');
+            menuOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+    });
+    
+    console.log("Script loaded and executed");
 });
